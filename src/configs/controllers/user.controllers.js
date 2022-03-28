@@ -9,7 +9,7 @@ const router=express.Router();
 router.post("/register",async(req,res)=>{
 
     try{
-        const user=await User.create();
+        const user=await User.create(req.body);
 
         return res.status(200).send(user);
     }
@@ -21,7 +21,7 @@ router.post("/register",async(req,res)=>{
 router.post("/login",async(req,res)=>{
 
     try{
-        const login=await User.create();
+        const login=await User.create(req.body);
 
         return res.status(200).send(login);
     }
@@ -33,7 +33,7 @@ router.post("/login",async(req,res)=>{
 router.post("/todos",async(req,res)=>{
 
     try{
-        const todo=await User.create();
+        const todo=await User.create(req.body);
 
         return res.status(200).send(todo);
     }
@@ -45,7 +45,7 @@ router.post("/todos",async(req,res)=>{
 router.get("/todos",async(req,res)=>{
 
     try{
-        const todos=await User.find().lean().exex();
+        const todos=await User.findById(req.params.id).lean().exex();
 
         return res.status(200).send(user);
     }
@@ -57,7 +57,7 @@ router.get("/todos",async(req,res)=>{
 router.get("/todos:id",async(req,res)=>{
 
     try{
-        const todos=await User.find().lean().exex();
+        const todos=await User.find(req.params.id).lean().exex();
 
         return res.status(200).send(todo);
     }
@@ -69,7 +69,7 @@ router.get("/todos:id",async(req,res)=>{
 router.patch("/todos:id",async(req,res)=>{
 
     try{
-        const todos=await User.update().lean().exex();
+        const todos=await User.findByIdAndUpdate(req.param.id,req.body).lean().exex();
 
         return res.status(200).send(todo);
     }
@@ -81,7 +81,7 @@ router.patch("/todos:id",async(req,res)=>{
 router.delete("/todos:id",async(req,res)=>{
 
     try{
-        const todos=await User.remove().lean().exex();
+        const todos=await User.findByIdAndDelete(req.param.id).lean().exex();
 
         return res.status(200).send(todo);
     }
